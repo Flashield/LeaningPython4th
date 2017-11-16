@@ -28,3 +28,53 @@ print(x)
 print(next(x))
 print(next(x))
 print(next(x))
+
+def gen():
+    for i in range(10):
+        X = yield i+1
+        print(X)
+G=gen()
+print(next(G))
+#print(G.send(10))
+#print(G.send(20))
+print(next(G))
+'''注释'''
+print((x ** 2 for x in range(4)))
+print(list(x ** 2 for x in range(4)),tuple(x ** 2 for x in range(4)))
+print(''.join(x for x in 'aaa,bbb,ccc'.split(',')))
+print(list(map(lambda x: x * 2, map(abs, (-1, -2, 3, 4)))))
+
+line = 'aa bbb c'
+print(''.join(x for x in line.split() if len(x) > 1))
+print(list(map(lambda x:x , line.split())))
+print(''.join(map(lambda x:x.upper() ,line.split())))
+
+G = (c * 4 for c in 'SPAM')
+print(iter(G) is G)
+print(next(G))
+print(next(G))
+print(next(G))
+print(next(G))
+
+def both(N):
+    for i in range(N): yield i
+    for i in (x ** 2 for x in range(N)): yield i
+B=both(5)
+print(next(B))
+print(list(B))
+
+import os
+for (root, subs, files) in os.walk(r'.'):
+    for name in files:
+        print(root,subs, name)
+
+D = dict(a='Bob', b='dev', c=40.5)
+def f(a, b, c): print('%s, %s, and %s' % (a, b, c))
+print(f(*D))
+
+L, S = [1, 2, 3], 'spam'
+for i in range(len(S)):
+    S = S[1:] + S[:1]
+    print(S, end=' ')
+
+print(list(map(lambda x, y: x + y, open('Chapter04.py'), open('Chapter05.py'))))
